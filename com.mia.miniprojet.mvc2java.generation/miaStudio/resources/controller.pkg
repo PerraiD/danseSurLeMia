@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE PACKAGE SYSTEM "package.dtd">
+<PACKAGE NAME="controler" METAMODEL="MVC" NUMBER="12"
+>
+	<fileHeader version="5" toolName="Mia-Generation" toolVersion="9.1.0"/>
+	<SCENARIO NAME="BanqueControlerGenerator" VISIBILITY="public" META_OBJECT="View" CATEGORY="default">
+		<SERVICE_CALL NAME="current" PACKAGE="System" META_OBJECT="View"/>
+		<GENERATION_STEP TYPE="FileTemplate" PACKAGE="controler" META_OBJECT="View" CATEGORY="default" NAME="IControler" PARAM_COUNT="0"/>
+		<GENERATION_STEP TYPE="FileTemplate" PACKAGE="controler" META_OBJECT="View" CATEGORY="default" NAME="Controler" PARAM_COUNT="0"/>
+	</SCENARIO>
+	<SCRIPT NAME="ControlerMethodDefinition" META_OBJECT="Action" CATEGORY="default">
+		<TEXT><![CDATA[
+public void [[name]](){
+	[[BeginTag]]
+	[[EndTag]]
+}
+
+]]></TEXT>
+		<PROPERTY NAME="BeginTag"/>
+		<PROPERTY NAME="EndTag"/>
+	</SCRIPT>
+	<SCRIPT NAME="ControlerMethodDefinition$BeginTag" META_OBJECT="Action" CATEGORY="default">
+		<TEXT><![CDATA[
+// Start of user code for [[name]]
+]]></TEXT>
+	</SCRIPT>
+	<SCRIPT NAME="ControlerMethodDefinition$EndTag" META_OBJECT="Action" CATEGORY="default">
+		<TEXT><![CDATA[
+// End of user code
+]]></TEXT>
+	</SCRIPT>
+	<SCRIPT NAME="IControlerMethodDeclaration" META_OBJECT="Action" CATEGORY="default">
+		<TEXT><![CDATA[
+public void [[name]]();
+
+]]></TEXT>
+	</SCRIPT>
+	<SCRIPT NAME="ControlerAttributeDeclaration" META_OBJECT="Model" CATEGORY="default">
+		<TEXT><![CDATA[
+	private [[name]]View view;
+	private I[[name]] model;
+]]></TEXT>
+	</SCRIPT>
+	<SCRIPT NAME="ControlerConstructorDeclaration" META_OBJECT="Model" CATEGORY="default">
+		<TEXT><![CDATA[
+public [[name]]Controler(com.mia.banque.model.I[[name]] model) {
+		this.model = model;
+	}
+]]></TEXT>
+	</SCRIPT>
+	<SCRIPT NAME="Controler" META_OBJECT="View" CATEGORY="default" FILE_ENCODING="UTF-8" VISIBILITY="private">
+		<TEXT><![CDATA[
+package com.mia.banque.ui.controler.swt;
+[[ControlerImport]]
+
+public class  [[current.model.name]]Controler  implements I[[current.model.name]]Controler {
+	[[model.ControlerAttributeDeclaration]]
+	[[model.ControlerConstructorDeclaration]]
+	[[ControlerInitViewImplementation]]	
+	[[actions.ControlerMethodDefinition]]
+	
+}
+]]></TEXT>
+		<PROPERTY NAME="Filename"/>
+	</SCRIPT>
+	<SCRIPT NAME="Controler$Filename" META_OBJECT="View" CATEGORY="default">
+		<TEXT><![CDATA[
+com/mia/banque/ui/controler/swt/[[current.model.name]]Controler.java
+]]></TEXT>
+	</SCRIPT>
+	<SCRIPT NAME="ControlerImport" META_OBJECT="View" CATEGORY="default">
+		<TEXT><![CDATA[
+import com.mia.banque.model.I[[current.model.name]];
+import com.mia.banque.ui.controler.I[[current.model.name]]Controler;
+import com.mia.banque.ui.view.swt.[[name]];
+import org.eclipse.swt.widgets.Display;
+
+]]></TEXT>
+	</SCRIPT>
+	<SCRIPT NAME="ControlerInitViewImplementation" META_OBJECT="View" CATEGORY="default">
+		<TEXT><![CDATA[
+public void initView() {
+		Display display = Display.getDefault();
+		
+		
+		this.view = new [[name]](display, this.model, this);
+		this.view.open();
+		this.view.layout();
+		
+		while (!this.view.isDisposed()) {
+			if (!display.readAndDispatch()) {
+				display.sleep();
+			}
+		}
+
+	}
+]]></TEXT>
+	</SCRIPT>
+	<SCRIPT NAME="IControler" META_OBJECT="View" CATEGORY="default" FILE_ENCODING="UTF-8" VISIBILITY="private">
+		<TEXT><![CDATA[
+package com.mia.banque.ui.controler;
+
+public interface I[[model.name]]Controler {
+	public void initView();
+	[[actions.IControlerMethodDeclaration]]
+}
+]]></TEXT>
+		<PROPERTY NAME="Filename"/>
+	</SCRIPT>
+	<SCRIPT NAME="IControler$Filename" META_OBJECT="View" CATEGORY="default">
+		<TEXT><![CDATA[
+com/mia/banque/ui/controler/I[[current.model.name]]Controler.java
+]]></TEXT>
+	</SCRIPT>
+</PACKAGE>

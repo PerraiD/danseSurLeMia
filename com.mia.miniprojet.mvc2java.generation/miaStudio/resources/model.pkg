@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE PACKAGE SYSTEM "package.dtd">
+<PACKAGE NAME="model" METAMODEL="MVC" NUMBER="12"
+>
+	<fileHeader version="5" toolName="Mia-Generation" toolVersion="9.1.0"/>
+	<SCENARIO NAME="BanqueModelGenerator" VISIBILITY="public" META_OBJECT="Model" CATEGORY="default">
+		<SERVICE_CALL NAME="current" PACKAGE="System" META_OBJECT="Model"/>
+		<GENERATION_STEP TYPE="FileTemplate" PACKAGE="model" META_OBJECT="Model" CATEGORY="default" NAME="IModel" PARAM_COUNT="0"/>
+		<GENERATION_STEP TYPE="FileTemplate" PACKAGE="model" META_OBJECT="Model" CATEGORY="default" NAME="Model" PARAM_COUNT="0"/>
+	</SCENARIO>
+	<SCRIPT NAME="IModel" META_OBJECT="Model" CATEGORY="default" FILE_ENCODING="UTF-8" VISIBILITY="private">
+		<TEXT><![CDATA[
+[[IModelImportDeclaration]]
+
+public interface I[[name]] {
+[[properties.IModelAccesseurDeclaration]]
+[[ownedElements.IModelListDeclaration]]
+}
+
+
+]]></TEXT>
+		<PROPERTY NAME="Filename"/>
+	</SCRIPT>
+	<SCRIPT NAME="IModel$Filename" META_OBJECT="Model" CATEGORY="default">
+		<TEXT><![CDATA[
+com/mia/banque/model/I[[name]].java
+]]></TEXT>
+	</SCRIPT>
+	<SCRIPT NAME="IModelImportDeclaration" META_OBJECT="Model" CATEGORY="default">
+		<TEXT><![CDATA[
+package com.mia.banque.model;
+import java.util.List;
+]]></TEXT>
+	</SCRIPT>
+	<SCRIPT NAME="IModelListDeclaration" META_OBJECT="Model" CATEGORY="default">
+		<TEXT><![CDATA[
+public List<I[[name@¤] get[[name]]();
+public void set[[name]](List<I[[name@¤] newValue);	
+]]></TEXT>
+	</SCRIPT>
+	<SCRIPT NAME="Model" META_OBJECT="Model" CATEGORY="default" FILE_ENCODING="UTF-8" VISIBILITY="private">
+		<TEXT><![CDATA[
+[[ModelImportDeclaration]]
+
+public class [[name]] implements I[[name]]{
+	[[properties.ModelAttributeDeclaration]]
+	[[ownedElements.ModelListDeclaration]]
+	[[properties.ModelAccesseurDeclaration]]
+	[[ownedElements.ModelMethodeListDeclaration]]
+	
+}
+]]></TEXT>
+		<PROPERTY NAME="Filename"/>
+	</SCRIPT>
+	<SCRIPT NAME="Model$Filename" META_OBJECT="Model" CATEGORY="default">
+		<TEXT><![CDATA[
+com/mia/banque/model/impl/[[name]].java
+]]></TEXT>
+	</SCRIPT>
+	<SCRIPT NAME="ModelImportDeclaration" META_OBJECT="Model" CATEGORY="default">
+		<TEXT><![CDATA[
+package com.mia.banque.model.impl;
+import java.util.List;
+import java.util.ArrayList;
+import com.mia.banque.model.I[[name]];
+]]></TEXT>
+	</SCRIPT>
+	<SCRIPT NAME="ModelListDeclaration" META_OBJECT="Model" CATEGORY="default">
+		<TEXT><![CDATA[
+private List<com.mia.banque.model.I[[name@¤] list[[name]];
+]]></TEXT>
+	</SCRIPT>
+	<SCRIPT NAME="ModelMethodeListDeclaration" META_OBJECT="Model" CATEGORY="default">
+		<TEXT><![CDATA[
+
+public List<com.mia.banque.model.I[[name@¤] get[[name]](){
+	if (this.list[[name]] == null) {
+			this.list[[name]] = new ArrayList<com.mia.banque.model.I[[name@¤]();
+		}
+		return this.list[[name]];
+}
+public void set[[name]](List<com.mia.banque.model.I[[name@¤] newValue){
+	this.list[[name]] = newValue;
+}
+]]></TEXT>
+	</SCRIPT>
+	<SCRIPT NAME="IModelAccesseurDeclaration" META_OBJECT="ModelProperty" CATEGORY="default">
+		<TEXT><![CDATA[
+	public String get[[current.name]]();
+	
+	public void set[[current.name]](String newValue);
+	
+]]></TEXT>
+	</SCRIPT>
+	<SCRIPT NAME="ModelAccesseurDeclaration" META_OBJECT="ModelProperty" CATEGORY="default">
+		<TEXT><![CDATA[
+	public String get[[current.name]](){
+		return this.[[current.name]];
+	}
+	
+	public void set[[current.name]](String newValue){
+		this.[[current.name]] = newValue;
+	}
+	
+]]></TEXT>
+	</SCRIPT>
+	<SCRIPT NAME="ModelAttributeDeclaration" META_OBJECT="ModelProperty" CATEGORY="default">
+		<TEXT><![CDATA[
+private String [[current.name]];
+
+]]></TEXT>
+	</SCRIPT>
+</PACKAGE>

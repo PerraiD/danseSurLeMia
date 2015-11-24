@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Generated
+Bundle-SymbolicName: com.mia.banque.application.generated
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: com.mia.banque.application.generated.Activator
+Bundle-Vendor: MIA
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime
+Bundle-ActivationPolicy: lazy
+Export-Package: com.mia.banque.application.generated,
+ com.mia.banque.model,
+ com.mia.banque.model.impl,
+ com.mia.banque.ui.controler,
+ com.mia.banque.ui.controler.swt,
+ com.mia.banque.ui.view,
+ com.mia.banque.ui.view.swt
